@@ -99,6 +99,8 @@ fos_user:
 
 mobile_detect:
     redirect:
-        mobile: ~
-        tablet: ~
+        mobile:
+            is_enabled: false
+        tablet:
+            is_enabled: false
     switch_device_view: ~
