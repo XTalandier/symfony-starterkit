@@ -1,0 +1,24 @@
+parameters:
+    app.loader.filesystem.class: AppBundle\Loader\FilesystemLoader
+    app.loader.template_locator.class: AppBundle\Loader\TemplateLocator
+
+services:
+    app.loader.filesystem:
+        class: %app.loader.filesystem.class%
+        arguments: [@app.loader.template_locator, @templating.name_parser]
+        tags:
+            - { name: twig.loader }
+    app.loader.template_locator:
+        class: %app.loader.template_locator.class%
+        arguments: [@file_locator, null, %kernel.root_dir%]
+    app.listener.requestmobile:
+      class: AppBundle\AppBundle
+      tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    app.templating:
+        class: AppBundle\Templating\TemplatingProvider
+        scope: request
+        arguments:
+            - @templating
+            - @request
+            - 'html'

@@ -1,0 +1,10 @@
+services:
+    user.registration.form.type:
+        class: UserBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: user_registration }
+    user.twig.acme_extension:
+        class: UserBundle\Twig\UserExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@security.context"]
